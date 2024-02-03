@@ -1,0 +1,214 @@
+.header-header {
+  width: 100%;
+  display: flex;
+  position: relative;
+  max-width: var(--dl-size-size-maxwidth);
+  align-items: center;
+  padding-top: var(--dl-space-space-twounits);
+  padding-left: var(--dl-space-space-threeunits);
+  padding-right: var(--dl-space-space-threeunits);
+  padding-bottom: var(--dl-space-space-twounits);
+  justify-content: space-between;
+  background-color: #8c8c8c;
+}
+.header-navlink {
+  text-decoration: none;
+}
+.header-text {
+  text-align: center;
+}
+.header-btn-group {
+  display: flex;
+  align-items: center;
+  flex-direction: row;
+  justify-content: space-between;
+}
+.header-login {
+  border-width: 0px;
+  margin-right: var(--dl-space-space-twounits);
+  text-decoration: none;
+}
+.header-mobile-menu {
+  top: 0px;
+  left: 0px;
+  width: 100%;
+  height: 100vh;
+  display: none;
+  padding: 32px;
+  z-index: 100;
+  position: absolute;
+  flex-direction: column;
+  justify-content: space-between;
+  background-color: #fff;
+}
+.header-nav {
+  display: flex;
+  align-items: flex-start;
+  flex-direction: column;
+}
+.header-container {
+  width: 100%;
+  display: flex;
+  align-items: center;
+  margin-bottom: var(--dl-space-space-threeunits);
+  justify-content: space-between;
+}
+.header-image {
+  height: 2rem;
+}
+.header-menu-close {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+.header-icon {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+.header-icon2 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.header-icon4 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+  margin-right: var(--dl-space-space-twounits);
+}
+.header-icon6 {
+  width: var(--dl-size-size-xsmall);
+  height: var(--dl-size-size-xsmall);
+}
+
+
+
+@media(max-width: 767px) {
+  .header-header {
+    padding-left: var(--dl-space-space-twounits);
+    padding-right: var(--dl-space-space-twounits);
+  }
+}
+@media(max-width: 479px) {
+  .header-header {
+    padding: var(--dl-space-space-unit);
+  }
+  .header-btn-group {
+    display: flex;
+  }
+  .header-login {
+    animation-name: none;
+    animation-delay: 0s;
+    animation-duration: 300ms;
+    animation-direction: normal;
+    animation-iteration-count: 1;
+    animation-timing-function: ease;
+  }
+  .header-mobile-menu {
+    padding: 16px;
+  }
+}
+
+.home-container {
+  width: 100%;
+  display: flex;
+  overflow: auto;
+  min-height: 100vh;
+  align-items: center;
+  flex-direction: column;
+}
+.home-container1 {
+  top: 300px;
+  right: 11px;
+  width: 517px;
+  height: 157px;
+  display: flex;
+  position: absolute;
+  align-items: flex-start;
+  border-color: var(--dl-color-gray-black);
+  border-width: 5px;
+  flex-direction: column;
+  justify-content: flex-start;
+}
+.home-link {
+  font-size: 25px;
+}
+.home-link1 {
+  font-size: 25px;
+}
+.home-link2 {
+  font-size: 25px;
+}
+.home-link3 {
+  font-size: 25px;
+}
+.home-link4 {
+  font-size: 25px;
+}
+.home-container2 {
+  top: 145px;
+  left: 99px;
+  width: 452px;
+  height: 377px;
+  display: flex;
+  position: absolute;
+  align-items: center;
+  justify-content: center;
+}
+.home-text10 {
+  width: 273px;
+  height: 165px;
+  align-self: center;
+  text-align: center;
+}
+.home-text11 {
+  font-weight: 700;
+  line-height: 1.15;
+}
+.home-text12 {
+  font-weight: 700;
+  line-height: 1.15;
+}
+.home-text13 {
+  font-weight: 700;
+  line-height: 1.15;
+}
+.home-text14 {
+  font-weight: 700;
+  line-height: 1.15;
+}
+.home-form {
+  top: 451px;
+  left: 59px;
+  width: 548px;
+  height: 233px;
+  display: flex;
+  position: absolute;
+  align-items: flex-end;
+  margin-bottom: 42px;
+  justify-content: center;
+}
+.home-textinput {
+  top: 15px;
+  flex: 1;
+  left: 53px;
+  width: 418px;
+  height: 50%;
+  position: absolute;
+  align-self: center;
+}
+.home-navlink {
+  left: 212px;
+  bottom: 49px;
+  position: absolute;
+  text-decoration: none;
+}
+@media(max-width: 479px) {
+  .home-container2 {
+    height: 298px;
+    margin-bottom: 0px;
+  }
+  .home-textinput {
+    width: 339px;
+    height: 41px;
+  }
+}
