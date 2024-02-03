@@ -15,5 +15,8 @@ def search():
 def login():
     return render_template('login-page.html')
 
+@app.route('/register-page.html', methods=['GET', 'POST'])
+def register():
+    return render_template('register-page.html')
 
 app.run(host='localhost', port=5000)
