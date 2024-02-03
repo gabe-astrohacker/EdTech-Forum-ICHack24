@@ -108,24 +108,29 @@
   }
 }
 
-.login-page-container {
+.register-page-container {
   width: 100%;
   display: flex;
   overflow: auto;
   min-height: 100vh;
-  align-items: flex-start;
+  align-items: center;
   flex-direction: column;
   justify-content: flex-start;
 }
-.login-page-container1 {
+.register-page-container1 {
   width: 100%;
-  height: 156px;
+  height: 187px;
   display: flex;
+  position: relative;
   align-items: center;
-  flex-direction: column;
   justify-content: center;
 }
-.login-page-form {
+.register-page-text {
+  top: 114px;
+  left: 538px;
+  position: absolute;
+}
+.register-page-form {
   width: 100%;
   height: 198px;
   display: flex;
@@ -133,32 +138,16 @@
   align-items: flex-end;
   justify-content: center;
 }
-.login-page-textinput {
-  top: 102px;
-  left: 476px;
+.register-page-textinput {
+  top: 97px;
+  left: 478px;
   position: absolute;
 }
-.login-page-textinput1 {
-  top: 41px;
-  left: 475px;
+.register-page-textinput1 {
+  top: 38px;
+  left: 480px;
   position: absolute;
 }
-.login-page-navlink {
-  text-decoration: none;
-}
-.login-page-container2 {
-  flex: 0 0 auto;
-  width: 100%;
-  height: 176px;
-  display: flex;
-  align-items: center;
-  flex-direction: column;
-  justify-content: center;
-}
-.login-page-text1 {
-  align-self: center;
-  text-align: center;
-}
-.login-page-navlink1 {
+.register-page-navlink {
   text-decoration: none;
 }
