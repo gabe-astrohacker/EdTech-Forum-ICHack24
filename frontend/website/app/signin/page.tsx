@@ -2,8 +2,8 @@
 'use client'
 
 import React, { useState } from 'react';
-import Header from '../components/header.tsx';
-import signIn from '../components/header.tsx';
+import {Header} from '../components/header.tsx';
+import {signIn} from '../components/header.tsx';
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -20,8 +20,8 @@ const SignUp: React.FC = () => {
   };
 
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
     // Add logic to handle form submission (e.g., send data to backend)
+    e.preventDefault();
     signIn();
     console.log('Form submitted with data:', formData);
     // Assume successful

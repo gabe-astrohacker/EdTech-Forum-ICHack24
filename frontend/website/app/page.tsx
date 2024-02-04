@@ -1,5 +1,5 @@
 import Image from "next/image";
-import Header from './components/header.tsx';
+import{ Header } from './components/header.tsx';
 import SearchInput from "./components/SearchInput.tsx";
 
 
