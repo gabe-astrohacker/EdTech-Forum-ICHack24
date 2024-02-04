@@ -3,13 +3,12 @@ from flask import Flask, render_template, request
 app = Flask(__name__)
 
 @app.route('/')
-def home():
-    return render_template('home.html')
-
+def index():
+    return render_template('index.html')
  
 @app.route('/search-results-page.html', methods=['GET', 'POST'])
 def search():
-    return render_template('results.html')
+    return render_template('search-results-page.html')
 
 @app.route('/login-page.html', methods=['GET', 'POST'])
 def login():
