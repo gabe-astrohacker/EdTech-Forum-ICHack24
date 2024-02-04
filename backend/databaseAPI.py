@@ -120,8 +120,13 @@ def verify_email(email, password):
 # for_all_table(["users", "adamwatson1234", "posts", postID], print)
 def for_all_table(path, func):
     elems = list_to_children(path).get()
+
     for elem in elems.each():
         func(elem)
+
+
+def get_all_table(path):
+    return list_to_children(path).get()
 
 
 def scale_rep(rep):
