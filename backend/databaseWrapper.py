@@ -132,7 +132,7 @@ def get_student_searches(token):
 
 # Database updating
 
-def add_resource(link, description):
+def add_resource(link, description, keywords):
     rid = hash(link)
     try_val = get_val(["resources", str(rid)])
 
@@ -144,10 +144,10 @@ def add_resource(link, description):
                   "description": str(description),
                   "up_score": "0",
                   "down_score": "0"})
-        return True
-    else:
+
+        add_keywords(keywords)
         # TODO: If already added then increase reputation but do not add to database again
-        return False
+
 
 
 def add_discussion(link, question):

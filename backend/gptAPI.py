@@ -1,12 +1,11 @@
 import requests
-from youtube_transcript_api import YouTubeTranscriptApi
 from bs4 import BeautifulSoup
 
 
 openai_api_key = "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"
 
 
-def keywords_to_list(text):
+def text_to_keywords(text):
     resp = (make_prompt(text + "\n\nCan you give me 20 keywords as academic topics and split them into single words")
             .split("1.", 1))
     output = "." + resp[1]
@@ -19,17 +18,11 @@ def keywords_to_list(text):
     return new_suggestions
 
 
-def summarise_video(video_id):
-    transcript_as_dict = YouTubeTranscriptApi.get_transcript(video_id)
-
-    open_ai_input = ""
-    for entry in transcript_as_dict:
-        open_ai_input = open_ai_input + entry["text"] + " "
-
-    return make_prompt("Summarise this text in 100 words or less: " + open_ai_input)
+def summarise(text):
+    return make_prompt(f"Summarise this text in 100 words or less: {text}")
 
 
-def html_parser(html):
+def html_to_text(html):
     soup = BeautifulSoup(html, 'html.parser')
 
     pre_str = [i.text.replace("\n", "") for i in soup.find_all({"div": {"class": "texts"}})]
