@@ -175,6 +175,14 @@ def add_search_result(studentid, rid):
     set_data(["searches", str(student_time_id)], {"rid": str(rid)})
 
 
+def add_keywords(rid, keywords):
+    keyword_num = 0
+    for key in keywords:
+        keyword_num += 1
+        keyword_key = "keyword" + str(keyword_num)
+        set_data(["keywords", rid], {str(keyword_key): key})
+
+
 def to_composite_key(keys):
     return reduce(lambda x, y: x + "_" + y, keys)
 
