@@ -70,7 +70,7 @@ def get_students_in_class(token):
 
 # return:
 #         {
-#           link: { count: int, description: String, upscore: int , downscore: int },
+#           link: { count: int, description: String, up_score: int , down_score: int },
 #           link2...
 #         }
 def filter_by_keywords(keywords):
@@ -82,18 +82,18 @@ def filter_by_keywords(keywords):
         count = 0
         resource_keywords = table[rid]["keywords"].values()
 
-        for keywords in keywords:
-            if keywords in resource_keywords:
+        for keyword in keywords:
+            if keyword in resource_keywords:
                 count += 1
 
         if count > 0:
-            upscore, down_score = get_resource_scores(rid)
+            up_score, down_score = get_resource_scores(rid)
 
             link_to_info.update({
-                get_resource_link(rid),
+                get_resource_link(rid):
                 {"count": count,
                  "description": get_resource_description(rid),
-                 "upscore": upscore,
+                 "up_score": up_score,
                  "down_score": down_score
                  }
             })
@@ -117,12 +117,12 @@ def get_resource_description(token):
     return entry["description"]
 
 
-# RETURNS: (upscore, downscore)
+# RETURNS: (up_score, down_score)
 def get_resource_scores(token):
     entry = get_val(["resources", token])
     if entry is None:
         return None
-    return int(entry["upscore"]), int(entry["downscore"])
+    return int(entry["up_score"]), int(entry["down_score"])
 
 
 # RETURNS: [ rid ]
@@ -138,7 +138,11 @@ def add_resource(link, description):
 
     # Check if resource is already added
     if try_val is None:
+<<<<<<< Updated upstream
         set_data(["resources", str(rid)], {"link": str(link), "description": str(description), "upscore": "0", "downscore": "0"})
+=======
+        set_data(["resources", str(rid)], {"link": str(link), "desc": str(desc), "up_score": "0", "down_score": "0"})
+>>>>>>> Stashed changes
         return True
     else:
         # TODO: If already added then increase reputation but do not add to database again
@@ -190,8 +194,6 @@ def add_keywords(link, keywords):
 
 
 auth.sign_in_with_email_and_password("1.aniketgupta@gmail.com", "password1234")
-print()
-
 
 # Reputation misc
 
@@ -202,16 +204,20 @@ def scale_rep(rep):
 def inc_rep(rid):
     cur_user = auth.current_user['localId']
     if cur_user is not None:
-        upscore = get_val(["resources", str(rid), "upscore"])
+        up_score = get_val(["resources", str(rid), "up_score"])
         cur_user_rep = get_val(["users", str(cur_user), "reputation"])
-        upscore += scale_rep(cur_user_rep)
-        update_data(["resources", str(rid)], {"upscore": str(upscore)})
+        up_score += scale_rep(cur_user_rep)
+        update_data(["resources", str(rid)], {"up_score": str(up_score)})
 
 
 def dec_rep(rid):
     cur_user = auth.current_user['localId']
     if cur_user is not None:
-        downscore = get_val(["resources", str(rid), "downscore"])
+        down_score = get_val(["resources", str(rid), "down_score"])
         cur_user_rep = get_val(["users", str(cur_user), "reputation"])
-        downscore += scale_rep(cur_user_rep)
-        set_data(["resources", str(rid)], {"downscore": str(downscore)})
+        down_score += scale_rep(cur_user_rep)
+        set_data(["resources", str(rid)], {"down_score": str(down_score)})
+
+
+def resource_upload(link):
+

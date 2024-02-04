@@ -1,5 +1,7 @@
 import requests
 from youtube_transcript_api import YouTubeTranscriptApi
+from bs4 import BeautifulSoup
+
 
 openai_api_key = "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"
 
@@ -25,6 +27,17 @@ def summarise_video(video_id):
         open_ai_input = open_ai_input + entry["text"] + " "
 
     return make_prompt("Summarise this text in 100 words or less: " + open_ai_input)
+
+
+def html_parser(html):
+    soup = BeautifulSoup(html, 'html.parser')
+
+    pre_str = [i.text.replace("\n", "") for i in soup.find_all({"div": {"class": "texts"}})]
+
+    while "" in pre_str:
+        pre_str.remove("")
+
+    return '\n'.join(pre_str)
 
 
 def make_prompt(prompt):
