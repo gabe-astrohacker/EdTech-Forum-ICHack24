@@ -1,13 +1,14 @@
 import requests
 from youtube_transcript_api import YouTubeTranscriptApi
 import gptAPI
+from flask_cors import CORS
 from flask import Flask, request, url_for
 
 from backend.searchEngine import search
 from databaseWrapper import *
 
 app = Flask(__name__)
-
+CORS(app)
 
 @app.route('/resource_upload', methods=['POST'])
 def resource_upload(link, description):
