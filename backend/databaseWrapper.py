@@ -91,11 +91,11 @@ def filter_by_keywords(keywords):
 
             link_to_info.update({
                 get_resource_link(rid):
-                {"count": count,
-                 "description": get_resource_description(rid),
-                 "up_score": up_score,
-                 "down_score": down_score
-                 }
+                    {"count": count,
+                     "description": get_resource_description(rid),
+                     "up_score": up_score,
+                     "down_score": down_score
+                     }
             })
 
     return link_to_info
@@ -138,16 +138,16 @@ def add_resource(link, description):
 
     # Check if resource is already added
     if try_val is None:
-<<<<<<< Updated upstream
-        set_data(["resources", str(rid)], {"link": str(link), "description": str(description), "upscore": "0", "downscore": "0"})
-=======
-        set_data(["resources", str(rid)], {"link": str(link), "desc": str(desc), "up_score": "0", "down_score": "0"})
->>>>>>> Stashed changes
+
+        set_data(["resources", str(rid)],
+                 {"link": str(link),
+                  "description": str(description),
+                  "up_score": "0",
+                  "down_score": "0"})
         return True
     else:
         # TODO: If already added then increase reputation but do not add to database again
         return False
-
 
 
 def add_discussion(link, question):
@@ -195,6 +195,7 @@ def add_keywords(link, keywords):
 
 auth.sign_in_with_email_and_password("1.aniketgupta@gmail.com", "password1234")
 
+
 # Reputation misc
 
 def scale_rep(rep):
@@ -217,7 +218,3 @@ def dec_rep(rid):
         cur_user_rep = get_val(["users", str(cur_user), "reputation"])
         down_score += scale_rep(cur_user_rep)
         set_data(["resources", str(rid)], {"down_score": str(down_score)})
-
-
-def resource_upload(link):
-
