@@ -67,12 +67,53 @@ def get_students_in_class(token):
     return [value for key, value in get_val(["students"]).items() if key.endswith("_" + token)]
 
 
+# return:
+#         {
+#           link: { count: int, description: String, upscore: int , downscore: int },
+#           link2...
+#         }
+def filter_by_keywords(keywords):
+    table = get_val(["resources"])
+
+    link_to_info = {}
+
+    for rid in table:
+        count = 0
+        resource_keywords = table[rid]["keywords"].values()
+
+        for keywords in keywords:
+            if keywords in resource_keywords:
+                count += 1
+
+        if count > 0:
+            upscore, down_score = get_resource_scores(rid)
+
+            link_to_info.update({
+                get_resource_link(rid),
+                {"count": count,
+                 "description": get_resource_description(rid),
+                 "upscore": upscore,
+                 "down_score": down_score
+                 }
+            })
+
+    return link_to_info
+
+
 # RETURNS: Hyperlink
 def get_resource_link(token):
     entry = get_val(["resources", token])
     if entry is None:
         return None
     return entry["link"]
+
+
+# RETURNS: Hyperlink
+def get_resource_description(token):
+    entry = get_val(["resources", token])
+    if entry is None:
+        return None
+    return entry["description"]
 
 
 # RETURNS: (upscore, downscore)
