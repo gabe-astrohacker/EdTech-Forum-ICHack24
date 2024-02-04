@@ -2,17 +2,18 @@ from databaseAPI import *
 from datetime import datetime
 import uuid
 import time
+from math import log
 
 
 # Authentication
 
 # Example Usage
 # create_user("user@example.com", "password1234", "Jane", "Doe)
-def create_user(email, password, first_name, surname):
+def create_user(email, password):
     auth.create_user_with_email_and_password(email, password)
     cur_user = sign_in_user(email, password)
     set_data(["users", cur_user],
-             {"uid": str(cur_user), "firstname": str(first_name), "surname": str(surname), "reputation": "0"})
+             {"uid": str(cur_user), "reputation": "0"})
 
 
 def get_user_token(email, password):
@@ -36,6 +37,10 @@ def sign_in_user(email, password):
     user = auth.sign_in_with_custom_token(token)
     cur_user = auth.get_account_info(user['idToken'])
     return cur_user
+
+
+def sign_out_user():
+    auth.current_user = None
 
 
 # Example Usage
@@ -138,16 +143,13 @@ def add_resource(link, description, keywords):
 
     # Check if resource is already added
     if try_val is None:
-
         set_data(["resources", str(rid)],
                  {"link": str(link),
                   "description": str(description),
                   "up_score": "0",
                   "down_score": "0"})
-
         add_keywords(keywords)
         # TODO: If already added then increase reputation but do not add to database again
-
 
 
 def add_discussion(link, question):
@@ -198,23 +200,34 @@ auth.sign_in_with_email_and_password("1.aniketgupta@gmail.com", "password1234")
 
 # Reputation misc
 
-def scale_rep(rep):
-    return rep
+def scale_rep(rep, func):
+    if func == 'i':
+        return round(rep + rep * log(rep))
+    elif func == 'd':
+        return round(rep - rep * log(rep))
+    else:
+        return None
 
 
-def inc_rep(rid):
+def inc_rep(link, func):
+    rid = hash(link)
     cur_user = auth.current_user['localId']
     if cur_user is not None:
         up_score = get_val(["resources", str(rid), "up_score"])
         cur_user_rep = get_val(["users", str(cur_user), "reputation"])
-        up_score += scale_rep(cur_user_rep)
+        up_score += 1 if func == 'i' else - 1
+        cur_user_rep = scale_rep(cur_user_rep, func)
         update_data(["resources", str(rid)], {"up_score": str(up_score)})
+        update_data(["users", str(cur_user)], {"reputation": str(cur_user_rep)})
 
 
-def dec_rep(rid):
+def dec_rep(link, func):
+    rid = hash(link)
     cur_user = auth.current_user['localId']
     if cur_user is not None:
         down_score = get_val(["resources", str(rid), "down_score"])
         cur_user_rep = get_val(["users", str(cur_user), "reputation"])
-        down_score += scale_rep(cur_user_rep)
-        set_data(["resources", str(rid)], {"down_score": str(down_score)})
+        down_score += 1 if func == 'i' else -1
+        cur_user_rep = scale_rep(cur_user_rep, func)
+        update_data(["resources", str(rid)], {"down_score": str(down_score)})
+        update_data(["users", str(cur_user)], {"reputation": str(cur_user_rep)})
