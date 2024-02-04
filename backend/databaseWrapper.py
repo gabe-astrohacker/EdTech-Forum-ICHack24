@@ -1,4 +1,5 @@
 from databaseAPI import *
+from datetime import datetime
 import uuid
 import time
 
@@ -131,17 +132,36 @@ def get_student_searches(token):
 
 # Database updating
 
-def add_resource(link, desc):
+def add_resource(link, description):
     rid = hash(link)
     try_val = get_val(["resources", str(rid)])
 
     # Check if resource is already added
     if try_val is None:
-        set_data(["resources", str(rid)], {"link": str(link), "desc": str(desc), "upscore": "0", "downscore": "0"})
+        set_data(["resources", str(rid)], {"link": str(link), "description": str(description), "upscore": "0", "downscore": "0"})
         return True
     else:
         # TODO: If already added then increase reputation but do not add to database again
         return False
+
+
+
+def add_discussion(link, question):
+    rid = hash(link)
+    discussion_id = uuid.uuid4()
+    owner_id = auth.current_user['localId']
+    timestamp = datetime.timestamp(datetime.now())
+    update_data(["discussions", str(discussion_id)],
+                {"owner_id": str(owner_id), "question": str(question), "timestamp": str(timestamp), "rid": str(rid)})
+
+
+def add_reply(discussion_id, reply):
+    reply_id = uuid.uuid4()
+    timestamp = datetime.timestamp(datetime.now())
+    owner_id = auth.current_user['localId']
+    update_data(["replies", str(reply_id)],
+                {"owner_id": str(owner_id), "reply": reply, "discussion_id": str(discussion_id),
+                 "timestamp": str(timestamp)})
 
 
 def add_classroom(teacherid):
