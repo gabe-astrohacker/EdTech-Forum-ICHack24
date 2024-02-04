@@ -3,6 +3,7 @@
 
 import React, { useState } from 'react';
 import Header from '../components/header.tsx';
+import signIn from '../components/header.tsx';
 
 const SignUp: React.FC = () => {
   const [formData, setFormData] = useState({
@@ -21,14 +22,14 @@ const SignUp: React.FC = () => {
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
     // Add logic to handle form submission (e.g., send data to backend)
+    signIn();
     console.log('Form submitted with data:', formData);
+    // Assume successful
   };
 
   return (
-    <div className="min-h-screen flex items-center justify-center">
-          <div>
-      <MyComponent text="Hello from MyComponent!" />
-    </div>
+    <div className="flex min-h-screen max-w-screen border w-full flex-col items-center  bg-white">
+      <Header/>
       <form className="max-w-md w-full p-4" onSubmit={handleSubmit}>
         <h2 className="text-2xl font-semibold mb-4">Log In</h2>
         <div className="mb-4">
